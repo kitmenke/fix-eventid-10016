@@ -5,6 +5,7 @@
 # S-1-5-32-544 BUILTIN\Administrators
 # S-1-5-32-545 BUILTIN\Users
 # S-1-5-18     NT AUTHORITY\SYSTEM
+# S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464  NT SERVICE\TrustedInstaller
 #$computerName = $env:computername
 #$admin = [System.Security.Principal.NTAccount]"$computerName\Administrator"
 #$account = [System.Security.Principal.NTAccount]"BUILTIN\Administrators"
