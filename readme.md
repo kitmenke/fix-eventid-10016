@@ -2,6 +2,8 @@
 
 Create a system restore point and back up your data before running these scripts!
 
+TODO: unable to fix RuntimeBroker errors CLSID {D63B10C5-BB46-4990-A94F-E40B9D520160} and APPID {9CA88EE3-ACB7-47C8-AFC4-AB702511C276}
+
 # Overview
 
 This script is designed to fix a COM error that occurs repeatedly. The error is logged in the event log:

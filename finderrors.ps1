@@ -38,4 +38,4 @@ $USERSID = $logEntry.Properties[7].Value
 Write-Host "USERSID=$USERSID"
 
 Write-Host ".\checkerrors.ps1 ""$APPID"" ""$USERSID"""
-Write-Host ".\fixerrors.ps1 ""$APPID"" ""$CLSID"""
+Write-Host ".\fixerrors.ps1 ""$APPID"" ""$CLSID"" ""$USERDOMAIN"" ""$USERNAME"""

@@ -7,7 +7,9 @@
 
 Param(
   [string]$APPID,
-  [string]$CLSID
+  [string]$CLSID,
+  [string]$USERDOMAIN,
+  [string]$USERNAME
 )
 
 # TODO: make these parameters?
@@ -28,6 +30,8 @@ Param(
 # Adjust the permissions for these keys
 Write-Host "CLSID is $CLSID"
 Write-Host "APPID is $APPID"
+Write-Host "User domain is $USERDOMAIN"
+Write-Host "Username is $USERNAME"
 
 # to check your priviledges:
 # whoami /priv
@@ -52,7 +56,7 @@ Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-32-544"
 
 # TODO: the user should be configurable? Or will this always be the SYSTEM user?
 # Add NT AUTHORITY\SYSTEM with Local Launch and Local Activation permissions
-Set-DcomAppPermissions $APPID "NT AUTHORITY" "SYSTEM"
+Set-DcomAppPermissions $APPID $USERDOMAIN $USERNAME
 
 # Restore CLSID permissions back to SYSTEM and APPID permissions back to TRUSTED INSTALLER
 Set-RegistryKeyPermissions "HKCR" "CLSID\$CLSID" "S-1-5-18" $true
