@@ -46,9 +46,6 @@ try {
 # Change permissions of two registry keys and all child keys
 # BUILTIN\Administrators (S-1-5-32-544) will be the owner and will have Full Control permissions
 
-# HKEY_Classes_Root\CLSID\*CLSID*
-# HKEY_LocalMachine\Software\Classes\AppID\*APPID*
-
 # S-1-5-32-544 BUILTIN\Administrators
 Set-RegistryKeyPermissions "HKCR" "CLSID\$CLSID" "S-1-5-32-544" $true
 Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-32-544" $true
@@ -57,8 +54,7 @@ Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-32-544"
 # Add NT AUTHORITY\SYSTEM with Local Launch and Local Activation permissions
 Set-DcomAppPermissions $APPID "NT AUTHORITY" "SYSTEM"
 
-# TODO: Restore CLSID permissions back to SYSTEM and APPID permissions back to TRUSTED INSTALLER
-
+# Restore CLSID permissions back to SYSTEM and APPID permissions back to TRUSTED INSTALLER
 Set-RegistryKeyPermissions "HKCR" "CLSID\$CLSID" "S-1-5-18" $true
 # S-1-5-18     NT AUTHORITY\SYSTEM
 Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464" $true
