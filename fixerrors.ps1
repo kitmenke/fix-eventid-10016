@@ -6,16 +6,15 @@
 ###############################################################################
 
 Param(
-  [string]$CLSID,
-  [string]$APPID
+  [string]$APPID,
+  [string]$CLSID
 )
 
 # TODO: make these parameters?
 #$CLSID = "{D63B10C5-BB46-4990-A94F-E40B9D520160}"
 #$APPID = "{9CA88EE3-ACB7-47C8-AFC4-AB702511C276}"
-$CLSID = "{8D8F4F83-3594-4F07-8369-FC3C3CAE4919}"
-$APPID = "{F72671A9-012C-4725-9D2F-2A4D32D65169}"
-$LOG_ONLY = $true
+#$CLSID = "{8D8F4F83-3594-4F07-8369-FC3C3CAE4919}"
+#$APPID = "{F72671A9-012C-4725-9D2F-2A4D32D65169}"
 
 # Checkpoint-Computer -Description "Fix DCOM errors script"
 
@@ -51,8 +50,8 @@ try {
 # HKEY_LocalMachine\Software\Classes\AppID\*APPID*
 
 # S-1-5-32-544 BUILTIN\Administrators
-#Set-RegistryKeyPermissions "HKCR" "CLSID\$CLSID" "S-1-5-32-544" $true
-#Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-32-544" $true
+Set-RegistryKeyPermissions "HKCR" "CLSID\$CLSID" "S-1-5-32-544" $true
+Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-32-544" $true
 
 # TODO: the user should be configurable? Or will this always be the SYSTEM user?
 # Add NT AUTHORITY\SYSTEM with Local Launch and Local Activation permissions
@@ -60,10 +59,9 @@ Set-DcomAppPermissions $APPID "NT AUTHORITY" "SYSTEM"
 
 # TODO: Restore CLSID permissions back to SYSTEM and APPID permissions back to TRUSTED INSTALLER
 
-#Set-RegistryKeyPermissions "HKCR" "CLSID\$CLSID" "S-1-5-32-544" $true
+Set-RegistryKeyPermissions "HKCR" "CLSID\$CLSID" "S-1-5-18" $true
 # S-1-5-18     NT AUTHORITY\SYSTEM
-
-#Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-32-544" $true
+Set-RegistryKeyPermissions "HKLM" "Software\Classes\AppID\$APPID" "S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464" $true
 # S-1-5-80-956008885-3418522649-1831038044-1853292631-2271478464  NT SERVICE\TrustedInstaller
 
 Write-Host "Script complete"

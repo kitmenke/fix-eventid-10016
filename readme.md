@@ -1,6 +1,6 @@
 # WARNING!!!
 
-These scripts can really mess up your PC! Create a system restore point before running the scripts and back up your data.
+Create a system restore point and back up your data before running these scripts!
 
 # Overview
 
@@ -13,17 +13,16 @@ This script is designed to fix a COM error that occurs repeatedly. The error is 
      to the user NT AUTHORITY\SYSTEM SID (S-1-5-18) from address LocalHost (Using LRPC) running in the application container Unavailable SID (Unavailable). This security permission can be modified
     using the Component Services administrative tool.
 
+Giving the SYSTEM account access is actually pretty complicated. In order to change the permissions for the COM Server application, you need permissions to two separate registry keys.
+    
 # Scripts
 
-finderrors.ps1 - Search the windows event log for entries matching the above.
-checkerrors.ps1 - Check to see if the given user has FULL CONTROL to the application (using app id).
-fixerrors.ps1 - TODO: automatically fix the error.
-
-# Notes
-This script automates the manual steps documented here:
+ - finderrors.ps1 - Search the windows event log for entries matching the above.
+ - checkerrors.ps1 - Check to see if the given user has FULL CONTROL to the application (using app id).
+ - fixerrors.ps1 - Automatically fix the error. This script automates the manual steps documented here:
 http://answers.microsoft.com/en-us/windows/forum/windows_8-performance/event-id-10016-the-application-specific-permission/9ff8796f-c352-4da2-9322-5fdf8a11c81e?auth=1
 
-Source:
+# Notes
 
 https://answers.microsoft.com/en-us/windows/forum/windows_10-performance/event-log-writes-error-related-to-application/e64806c2-510c-44c6-b22e-257d07d47200?page=2
 

@@ -5,11 +5,13 @@ Param(
 
 $app = get-wmiobject -query ('SELECT * FROM Win32_DCOMApplicationSetting WHERE AppId = "' + $APPID + '"')
 if (!$app) {
-  Write-Host "No DCOM application was found!"
+  Write-Host "No DCOM application was found for $APPID!"
   exit 1
 }
 
 $aclList = $app.GetLaunchSecurityDescriptor().Descriptor.DACL
+Write-Host ($aclList | Format-List | Out-String)
+
 # check whether the SYSTEM user has access
 $acl = $aclList | Where-Object {$_.Trustee.SIDString -eq $USERSID}
 

@@ -1,5 +1,7 @@
 # Adapted from: Change DCOM config security settings using Powershell (http://stackoverflow.com/a/22104787/98933)
 # Overwrites current permissions
+# Other sources:
+# https://rkeithhill.wordpress.com/2013/07/25/using-powershell-to-modify-dcom-launch-activation-settings/
 function Set-DcomAppPermissions {
   param(
     [string]$appid,
@@ -15,15 +17,12 @@ function Set-DcomAppPermissions {
   $fullControl = 31
   $localLaunchActivate = 11
   $ace = ([wmiclass] 'Win32_ACE').CreateInstance()
-  $ace.AccessMask = $localLaunchActivate
+  #$ace.AccessMask = $localLaunchActivate
+  $ace.AccessMask = $fullControl
   $ace.AceFlags = 0
   $ace.AceType = 0
   $ace.Trustee = $trustee
-  #Write-Host "Before:"
-  #$sd.DACL
-  [System.Management.ManagementBaseObject[]] $newDACL = $sd.DACL + @($ace)
-  #Write-Host "After:"
-  #$newDACL
-  $sd.DACL = $newDACL
+  $sd.DACL | Format-List | Out-File before.txt
+  $sd.DACL += $ace
   $app.SetLaunchSecurityDescriptor($sd)
 }
